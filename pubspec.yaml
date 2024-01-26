@@ -1,7 +1,7 @@
 name: sticky_table
 description: A table component that can fix headers, first and end columns, and customize cells and headers.
-version: 0.0.1
-homepage:
+version: 1.0.0
+homepage: https://github.com/AlwaysSum/flutter_sticky_table.git
 
 environment:
   sdk: '>=3.1.2 <4.0.0'
