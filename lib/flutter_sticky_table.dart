@@ -40,8 +40,9 @@ class StickyTableColumn<T> {
     this.fixedEnd = false,
   });
 
-  final Widget Function(
-      BuildContext context, StickyTableColumn<T> title)? renderTitle;
+  final Widget Function(BuildContext context, StickyTableColumn<T> title)?
+      renderTitle;
+
   final StickyTableCellFunction<T, Widget>? renderCell;
 
   final void Function(BuildContext context, StickyTableColumn<T> title)?
@@ -67,6 +68,7 @@ class StickyTable<T> extends StatefulWidget {
     this.showZebraCrossing = true,
     this.zebraCrossingColor = (Colors.white, const Color(0xfff5f5f5)),
     this.zebraCrossingRadius = const Radius.circular(12),
+    this.builderSortWidget,
   });
 
   ///默认列宽度
@@ -103,6 +105,10 @@ class StickyTable<T> extends StatefulWidget {
 
   ///斑马线颜色
   final (Color, Color) zebraCrossingColor;
+
+  ///构建排序组件
+  final Widget Function(BuildContext context, StickyTableColumn<T> title)?
+      builderSortWidget;
 
   @override
   State<StickyTable<T>> createState() => _StickyTableState<T>();
@@ -245,9 +251,11 @@ class _StickyTableState<T> extends State<StickyTable<T>> {
                                   ? e.renderTitle!(context, e)
                                   : renderTitle(context, e),
                               if (e.showSort)
-                                _SortWidget(
-                                  sortUp: e.sort,
-                                ),
+                                widget.builderSortWidget != null
+                                    ? widget.builderSortWidget!(context, e)
+                                    : _SortWidget(
+                                        sortUp: e.sort,
+                                      ),
                             ],
                           ),
                         ),
@@ -305,8 +313,8 @@ class _StickyTableState<T> extends State<StickyTable<T>> {
   }
 
   ///渲染标题
-  Widget renderCell(BuildContext context, StickyTableColumn<T> title,
-      T data, int row, int column) {
+  Widget renderCell(BuildContext context, StickyTableColumn<T> title, T data,
+      int row, int column) {
     return const Text("-");
   }
 
