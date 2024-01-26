@@ -1,3 +1,6 @@
+## 1.0.1
+* update version code
+
 ## 1.0.0
 
 * 固定表头
