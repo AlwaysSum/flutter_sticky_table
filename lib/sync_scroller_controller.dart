@@ -92,8 +92,8 @@ class SyncScrollController {
   void dispose() {
     _allControllers.forEach((key, value) {
       value.dispose();
-      _allControllers.remove(key);
     });
+    _allControllers.clear();
   }
 }
 
